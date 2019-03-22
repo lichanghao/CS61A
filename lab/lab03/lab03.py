@@ -17,6 +17,13 @@ def make_buzzer(n):
     9
     """
     "*** YOUR CODE HERE ***"
+    def buzzer(a):
+        for i in range(a):
+            if i % n == 0:
+                print("Buzz!")
+            else:
+                print(i)
+    return buzzer
 
 # Q4
 def f1():
@@ -25,28 +32,28 @@ def f1():
     3
     """
     "*** YOUR CODE HERE ***"
-
+    return 3
 def f2():
     """
     >>> f2()()
     3
     """
     "*** YOUR CODE HERE ***"
-
+    return lambda : 3
 def f3():
     """
     >>> f3()(3)
     3
     """
     "*** YOUR CODE HERE ***"
-
+    return lambda x:3
 def f4():
     """
     >>> f4()()(3)()
     3
     """
     "*** YOUR CODE HERE ***"
-
+    return lambda: lambda x: lambda : 3
 # Q6
 def sum(n):
     """Computes the sum of all integers between 1 and n, inclusive.
@@ -58,6 +65,10 @@ def sum(n):
     15
     """
     "*** YOUR CODE HERE ***"
+    if n == 1:
+        return 1
+    else:
+        return n + sum(n-1)
 
 # Q7
 
@@ -87,7 +98,7 @@ def fibonacci(n):
     elif n == 1:
         return 1
     else:
-        fibonacci(n - 1) + fibonacci(n - 2)
+        return  fibonacci(n - 1) + fibonacci(n - 2)
 
 
 # Q8
@@ -108,3 +119,44 @@ def hailstone(n):
     """
     "*** YOUR CODE HERE ***"
 
+# Q9
+def cycle(f1, f2, f3):
+    def make_cycle(n):
+        def cycle_n(x):
+            functionList = [f1, f2, f3]
+            for i in range(n):
+                x = functionList[n % 3 - 1](x)
+            return x
+        return cycle_n           
+    return make_cycle
+
+# Q9 Test
+def add1(x):
+    return x + 1
+def times2(x):
+    return x * 2
+def add3(x):
+    return x + 3
+
+my_cycle = cycle(add1, times2, add3)
+
+# Q10
+def lambda_curry2(func):
+    return lambda x: lambda y: func(x,y)
+
+# Q12
+def paths(m, n):
+    if m == 1 or n == 1:
+        return 1
+    else:
+        return paths(m-1, n) + paths(m, n-1)
+
+# Q13
+def gcd(a, b):
+    if a >= b:
+        if a % b == 0:
+            return b
+        else:
+            return gcd(b, a % b)
+    else:
+        return gcd(b, a)
